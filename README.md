@@ -8,13 +8,13 @@
 
 ## The Problem
 
-Google My Maps is genuinely useful. You can plan a custom bike route, a walking tour, a scenic drive — add your own waypoints, draw your own path, layer your own logic on top of a map. It feels like the right tool.
+Google My Maps is genuinely useful. You can plan a custom bike route, a walking tour, a scenic drive, add your own waypoints, draw your own path, layer your own logic on top of a map. It feels like the right tool.
 
 Until you try to actually *follow* the route.
 
-Export the file and open it anywhere — Google Maps, Maps.me, any GPX viewer — and you get a static bird's-eye picture. The route sits there. There's no "start navigation." No voice telling you when to turn. No sense of where you are on the path. If you look down at your phone for a second you've already missed the turn, because nothing told you it was coming.
+Export the file and open it anywhere — Google Maps, Maps.me, any GPX viewer — and you get a static bird's-eye picture. The route sits there. There's no "start navigation." No voice telling you when to turn. No sense of where you are on the path. 
 
-This gap is real and it affects a specific kind of user: cyclists planning custom rides, hikers piecing together trails from multiple sources, anyone who builds a route in My Maps and then has to fumble through it manually while moving.
+This gap is real and it affects a specific kind of user: cyclists planning custom rides (me!), hikers piecing together trails from multiple sources, anyone who builds a route in My Maps and then has to fumble through it manually while moving.
 
 ---
 
@@ -69,57 +69,6 @@ RouteNav will track your position, announce upcoming turns, warn if you go off r
 
 ---
 
-## Technical Overview
-
-### Architecture
-
-Zero-dependency, single-file web application. Runs entirely in the browser — no server, no backend, no API calls.
-
-```
-route-navigator/
-└── index.html     ← everything: HTML, CSS, JS in one file
-```
-
-### Key Technologies
-
-| Layer | Technology | Why |
-|---|---|---|
-| Map rendering | Leaflet.js | Lightweight, open-source, no API key |
-| Map tiles | CartoDB Dark Matter via OpenStreetMap | Free, dark aesthetic, no key required |
-| GPS positioning | Browser Geolocation API | Native to every modern browser |
-| Voice directions | Browser Web Speech API | Built-in text-to-speech, zero cost |
-| Route parsing | Native DOMParser | Parses KML/GPX XML without a library |
-| Hosting | GitHub Pages | Static file, deploys directly from repo |
-
-### Navigation Algorithm
-
-**Turn detection** — the route is simplified to remove near-duplicate GPS points (< 6m apart). For each consecutive triple of points, the incoming and outgoing bearings are computed using the Haversine formula. A bearing change over 22° is classified as a turn:
-
-| Angle change | Classification |
-|---|---|
-| 22° – 45° | Bear left / Bear right |
-| 45° – 110° | Turn left / Turn right |
-| 110° – 155° | Sharp left / Sharp right |
-| > 155° | U-turn |
-
-**Route snapping** — on each GPS update, the app finds the nearest segment using perpendicular projection, advancing forward-only to prevent backtracking.
-
-**Off-route detection** — if GPS position exceeds 55m from the nearest route segment, the user is flagged and notified by voice and visual indicator.
-
----
-
-## Running Locally
-
-```bash
-git clone https://github.com/kateue/route-navigator.git
-cd route-navigator
-# Serve locally (GPS requires HTTPS or localhost)
-python3 -m http.server 8080
-# Open http://localhost:8080
-```
-
----
-
 ## Known Limitations (Prototype)
 
 - **No rerouting** — warns when off route but does not recalculate a new path
@@ -128,18 +77,8 @@ python3 -m http.server 8080
 
 ---
 
-## What's Next
-
-- Offline tile caching for routes without data coverage
-- Route re-entry guidance when off route
-- Elevation profile from GPX altitude data
-- Multi-stop ETA based on current speed
-- Share link with embedded route via URL parameter
-
----
-
 ## About
 
-Built by [Kate Ueda](https://kateue.github.io/portfolio) — full-stack developer focused on AI strategy and bridging real-world problems with practical software.
+Built by [Kate Ueda](https://kateue.github.io/portfolio) — full-stack developer focused on AI strategy.
 
-This project came from a specific, real frustration: planning a bike route in Google My Maps and having no way to follow it live. RouteNav is the prototype that shouldn't have needed to exist — but does.
+This project came from a specific, real frustration: planning a bike route in Google My Maps and having no way to follow it live. RouteNav is the prototype that shouldn't have needed to exist, but does...
