@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
-  <title>RouteNav â Custom Route Navigator</title>
+  <title>RouteNav &mdash; Custom Route Navigator</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -25,11 +25,11 @@
 
     html, body { height: 100%; font-family: var(--mono); background: var(--bg); color: var(--text); overflow: hidden; }
 
-    /* ââ SCREENS ââ */
+    /* -- SCREENS -- */
     .screen { position: fixed; inset: 0; display: flex; flex-direction: column; overflow: hidden; }
     .screen.hidden { display: none !important; }
 
-    /* ââ BUTTONS ââ */
+    /* -- BUTTONS -- */
     .btn {
       display: inline-flex; align-items: center; justify-content: center; gap: 8px;
       padding: 10px 22px; border-radius: 6px; font-family: var(--mono); font-size: 13px;
@@ -44,9 +44,9 @@
     .btn-danger:hover   { background: rgba(248,81,73,.25); }
     .btn:disabled { opacity: .4; cursor: not-allowed; }
 
-    /* ââââââââââââââââââââââââââââââââââââ
+    /* ------------------------------------
        UPLOAD SCREEN
-    ââââââââââââââââââââââââââââââââââââ */
+    ------------------------------------ */
     #uploadScreen {
       align-items: center; justify-content: center;
       padding: 24px; background: var(--bg);
@@ -96,9 +96,9 @@
     .how-to-title::before { content: '// '; color: var(--dim); }
     .how-to strong { color: var(--text); font-weight: 500; }
 
-    /* ââââââââââââââââââââââââââââââââââââ
+    /* ------------------------------------
        PREVIEW SCREEN
-    ââââââââââââââââââââââââââââââââââââ */
+    ------------------------------------ */
     #previewScreen { background: var(--bg); }
     #previewMap { flex: 1; min-height: 0; }
 
@@ -113,9 +113,9 @@
     .route-stats span { color: var(--blue); }
     .preview-actions { display: flex; gap: 10px; flex-shrink: 0; }
 
-    /* ââââââââââââââââââââââââââââââââââââ
+    /* ------------------------------------
        NAVIGATION SCREEN
-    ââââââââââââââââââââââââââââââââââââ */
+    ------------------------------------ */
     #navScreen { background: #000; }
 
     /* Top instruction bar */
@@ -175,7 +175,7 @@
     .nav-stat-val   { font-size: 20px; font-weight: 700; color: #e6edf3; line-height: 1; }
     .nav-stat-label { font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--dim); margin-top: 3px; }
 
-    /* ââ LOADING OVERLAY ââ */
+    /* -- LOADING OVERLAY -- */
     .overlay {
       position: fixed; inset: 0;
       background: rgba(13,17,23,.88);
@@ -192,7 +192,7 @@
     @keyframes spin { to { transform: rotate(360deg); } }
     .overlay-text { font-size: 13px; color: var(--dim); }
 
-    /* ââ TOAST ââ */
+    /* -- TOAST -- */
     .toast {
       position: fixed; bottom: 90px; left: 50%; transform: translateX(-50%);
       background: rgba(248,81,73,.12); border: 1px solid rgba(248,81,73,.35);
@@ -202,7 +202,7 @@
     }
     .toast.show { opacity: 1; }
 
-    /* ââ LEAFLET OVERRIDES ââ */
+    /* -- LEAFLET OVERRIDES -- */
     .leaflet-control-zoom { border: 1px solid var(--border) !important; border-radius: 6px !important; overflow: hidden; }
     .leaflet-control-zoom a { background: var(--bg2) !important; color: var(--text) !important; border-color: var(--border) !important; }
     .leaflet-control-zoom a:hover { background: var(--bg3) !important; color: var(--blue) !important; }
@@ -221,26 +221,26 @@
 <!-- Loading -->
 <div class="overlay hidden" id="loadingOverlay">
   <div class="spinner"></div>
-  <div class="overlay-text" id="loadingText">Loadingâ¦</div>
+  <div class="overlay-text" id="loadingText">Loading...</div>
 </div>
 
 <!-- Toast -->
 <div class="toast" id="toast"></div>
 
-<!-- ââââââââââââââââââââââââââââââââââââââââââ
+<!-- ----------------------------------------
      UPLOAD SCREEN
-ââââââââââââââââââââââââââââââââââââââââââ -->
+---------------------------------------- -->
 <div class="screen" id="uploadScreen">
   <div class="upload-wrap">
     <div class="upload-logo"><span>route</span>nav</div>
     <h1 class="upload-title">Custom Route Navigator</h1>
     <p class="upload-sub">
       Load a route from Google My Maps or any GPS app.<br/>
-      Follow it live with turn-by-turn voice directions â<br/>no API key needed.
+      Follow it live with turn-by-turn voice directions &mdash;<br/>no API key needed.
     </p>
 
     <div class="drop-zone" id="dropZone">
-      <div class="drop-icon">â¬</div>
+      <div class="drop-icon">&#11014;</div>
       <p class="drop-title">Drop your KML or GPX file here</p>
       <p class="drop-hint">Supports .kml and .gpx files.<br/>Works with Google My Maps, Komoot, Strava, and more.</p>
       <button class="btn btn-primary" id="browseBtn">Browse file</button>
@@ -249,42 +249,42 @@
 
     <div class="how-to">
       <p class="how-to-title">exporting from google my maps</p>
-      Open your map â click the <strong>â®</strong> (three dots) next to the layer â
-      <strong>Export to KML/KMZ</strong> â uncheck "Export as KMZ" â <strong>Download</strong>
+      Open your map &rarr; click the <strong>&#8942;</strong> (three dots) next to the layer &rarr;
+      <strong>Export to KML/KMZ</strong> &rarr; uncheck "Export as KMZ" &rarr; <strong>Download</strong>
     </div>
   </div>
 </div>
 
-<!-- ââââââââââââââââââââââââââââââââââââââââââ
+<!-- ----------------------------------------
      PREVIEW SCREEN
-ââââââââââââââââââââââââââââââââââââââââââ -->
+---------------------------------------- -->
 <div class="screen hidden" id="previewScreen">
   <div id="previewMap"></div>
   <div class="preview-panel">
     <div class="route-info">
       <div class="route-name" id="routeNameEl">Route</div>
       <div class="route-stats">
-        Distance: <span id="totalDistEl">â</span>
-        &nbsp;&nbsp;Turns: <span id="turnCountEl">â</span>
+        Distance: <span id="totalDistEl">&mdash;</span>
+        &nbsp;&nbsp;Turns: <span id="turnCountEl">&mdash;</span>
       </div>
     </div>
     <div class="preview-actions">
-      <button class="btn btn-ghost" id="backBtn">â Back</button>
-      <button class="btn btn-primary" id="startBtn">â¶ Start Navigation</button>
+      <button class="btn btn-ghost" id="backBtn">&larr; Back</button>
+      <button class="btn btn-primary" id="startBtn">&#9654; Start Navigation</button>
     </div>
   </div>
 </div>
 
-<!-- ââââââââââââââââââââââââââââââââââââââââââ
+<!-- ----------------------------------------
      NAVIGATION SCREEN
-ââââââââââââââââââââââââââââââââââââââââââ -->
+---------------------------------------- -->
 <div class="screen hidden" id="navScreen">
   <!-- Top instruction -->
   <div class="nav-top" id="navTop">
-    <div class="turn-icon" id="turnIcon">â</div>
+    <div class="turn-icon" id="turnIcon">&uarr;</div>
     <div class="turn-text">
-      <div class="turn-label" id="turnLabel">Calculatingâ¦</div>
-      <div class="turn-dist"  id="turnDist">â</div>
+      <div class="turn-label" id="turnLabel">Calculating...</div>
+      <div class="turn-dist"  id="turnDist">&mdash;</div>
     </div>
     <div class="gps-badge">
       <div class="gps-dot" id="gpsDot"></div>
@@ -298,27 +298,27 @@
   <!-- Bottom stats -->
   <div class="nav-bottom">
     <div class="nav-stat">
-      <div class="nav-stat-val" id="speedEl">â</div>
+      <div class="nav-stat-val" id="speedEl">&mdash;</div>
       <div class="nav-stat-label">km/h</div>
     </div>
     <div class="nav-stat">
-      <div class="nav-stat-val" id="remainEl">â</div>
+      <div class="nav-stat-val" id="remainEl">&mdash;</div>
       <div class="nav-stat-label">remaining</div>
     </div>
-    <button class="btn btn-danger" id="stopBtn">â  Stop</button>
+    <button class="btn btn-danger" id="stopBtn">&#9632; Stop</button>
   </div>
 </div>
 
-<!-- ââââââââââââââââââââââââââââââââââââââââââ
+<!-- ----------------------------------------
      SCRIPTS
-ââââââââââââââââââââââââââââââââââââââââââ -->
+---------------------------------------- -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script>
 'use strict';
 
-// âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+// ----------------------------------------
 // MATH / GEO UTILITIES
-// âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+// ----------------------------------------
 
 const EARTH_R = 6371000; // metres
 
@@ -333,12 +333,12 @@ function dist(a, b) {
   return EARTH_R * 2 * Math.atan2(Math.sqrt(s), Math.sqrt(1-s));
 }
 
-/** Compass bearing (0â360) from a to b */
+/** Compass bearing (0&ndash;360) from a to b */
 function bearing(a, b) {
-  const Ï1 = toRad(a[0]), Ï2 = toRad(b[0]);
-  const ÎÎ» = toRad(b[1] - a[1]);
-  const y = Math.sin(ÎÎ») * Math.cos(Ï2);
-  const x = Math.cos(Ï1)*Math.sin(Ï2) - Math.sin(Ï1)*Math.cos(Ï2)*Math.cos(ÎÎ»);
+  const phi1 = toRad(a[0]), phi2 = toRad(b[0]);
+  const dLon = toRad(b[1] - a[1]);
+  const y = Math.sin(dLon) * Math.cos(phi2);
+  const x = Math.cos(phi1)*Math.sin(phi2) - Math.sin(phi1)*Math.cos(phi2)*Math.cos(dLon);
   return (Math.atan2(y, x) * 180 / Math.PI + 360) % 360;
 }
 
@@ -381,9 +381,9 @@ function nearestSeg(pos, pts) {
   return { segIdx: bestIdx, offDist: bestDist };
 }
 
-// âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+// ----------------------------------------
 // FILE PARSERS
-// âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+// ----------------------------------------
 
 function parseFile(text, filename) {
   return filename.toLowerCase().endsWith('.gpx') ? parseGPX(text) : parseKML(text);
@@ -441,9 +441,9 @@ function parseGPX(text) {
   return { coords, name };
 }
 
-// âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+// ----------------------------------------
 // ROUTE SIMPLIFICATION (remove near-duplicate points)
-// âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+// ----------------------------------------
 
 function simplify(coords, minDist = 6) {
   if (coords.length < 2) return coords;
@@ -455,9 +455,9 @@ function simplify(coords, minDist = 6) {
   return out;
 }
 
-// âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+// ----------------------------------------
 // TURN DETECTION
-// âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+// ----------------------------------------
 
 const TURN_DEG   = 22;   // minimum bearing change to count as a turn
 const MERGE_DIST = 25;   // merge two turns closer than this (metres)
@@ -489,15 +489,15 @@ function detectTurns(pts) {
 
 function classifyTurn(t) {
   const abs = Math.abs(t.diff), right = t.diff > 0;
-  if      (abs > 155) { t.type = 'Make a U-turn';   t.icon = 'â©'; }
-  else if (abs > 110) { t.type = right ? 'Sharp right' : 'Sharp left';  t.icon = right ? 'â¤·' : 'â¤¶'; }
-  else if (abs >  45) { t.type = right ? 'Turn right'  : 'Turn left';   t.icon = right ? 'â' : 'â'; }
-  else                { t.type = right ? 'Bear right'  : 'Bear left';   t.icon = right ? 'â' : 'â'; }
+  if      (abs > 155) { t.type = 'Make a U-turn';   t.icon = '&#8617;'; }
+  else if (abs > 110) { t.type = right ? 'Sharp right' : 'Sharp left';  t.icon = right ? '&#10551;' : '&#10550;'; }
+  else if (abs >  45) { t.type = right ? 'Turn right'  : 'Turn left';   t.icon = right ? '&rarr;' : '&larr;'; }
+  else                { t.type = right ? 'Bear right'  : 'Bear left';   t.icon = right ? '&#8599;' : '&#8598;'; }
 }
 
-// âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+// ----------------------------------------
 // APP STATE
-// âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+// ----------------------------------------
 
 const S = {
   pts:       null,   // simplified [lat,lng] array
@@ -513,9 +513,9 @@ const S = {
   voiced:       new Set(),   // track which voice cues fired
 };
 
-// âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+// ----------------------------------------
 // MAPS
-// âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+// ----------------------------------------
 
 const TILES = 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png';
 const ATTR  = '&copy; <a href="https://carto.com/attributions">CARTO</a> &copy; <a href="https://www.openstreetmap.org/copyright">OSM</a>';
@@ -559,9 +559,9 @@ function mkNavMap(pts) {
   nMap.setView(pts[0], 16);
 }
 
-// âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
-// VOICE  (Web Speech API â zero API key required)
-// âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+// ----------------------------------------
+// VOICE  (Web Speech API &mdash; zero API key required)
+// ----------------------------------------
 
 function speak(text) {
   if (!window.speechSynthesis) return;
@@ -571,9 +571,9 @@ function speak(text) {
   speechSynthesis.speak(u);
 }
 
-// âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+// ----------------------------------------
 // NAVIGATION UPDATE  (called on every GPS position)
-// âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+// ----------------------------------------
 
 const OFF_ROUTE_M  = 55;  // metres off-route before warning
 const ARRIVE_M     = 25;  // metres to destination = arrived
@@ -588,7 +588,7 @@ function onPos(pos) {
   g('gpsLabel').textContent = 'gps';
 
   // Speed (may be null on some devices)
-  g('speedEl').textContent = spd != null ? Math.round(spd * 3.6) : 'â';
+  g('speedEl').textContent = spd != null ? Math.round(spd * 3.6) : '&mdash;';
 
   if (!S.active) return;
 
@@ -607,7 +607,7 @@ function onPos(pos) {
   // Arrival check
   if (!S.arrived && dist(here, S.pts[S.pts.length-1]) < ARRIVE_M) {
     S.arrived = true;
-    setTop('arrived', 'â', 'You have arrived!', '');
+    setTop('arrived', '&#10003;', 'You have arrived!', '');
     speak('You have arrived at your destination.');
     return;
   }
@@ -619,7 +619,7 @@ function onPos(pos) {
   if (!S.offRoute && wasOff) speak('Back on route. Continue.');
 
   if (S.offRoute) {
-    setTop('offroute', 'â ', 'Off route', 'Return to the path');
+    setTop('offroute', '&#9888;', 'Off route', 'Return to the path');
     return;
   }
 
@@ -627,7 +627,7 @@ function onPos(pos) {
   const next = S.turns.find(t => t.ptIdx > S.segIdx);
 
   if (!next) {
-    setTop('normal', 'â', 'Continue to destination', fmtDist(remain));
+    setTop('normal', '&uarr;', 'Continue to destination', fmtDist(remain));
     return;
   }
 
@@ -655,9 +655,9 @@ function onPosErr(err) {
   showToast('GPS error: ' + err.message);
 }
 
-// âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+// ----------------------------------------
 // UI HELPERS
-// âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+// ----------------------------------------
 
 function g(id) { return document.getElementById(id); }
 
@@ -685,13 +685,13 @@ function showToast(msg, ms = 3500) {
 function showLoading(txt) { g('loadingText').textContent = txt; g('loadingOverlay').classList.remove('hidden'); }
 function hideLoading()    { g('loadingOverlay').classList.add('hidden'); }
 
-// âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+// ----------------------------------------
 // FILE HANDLING
-// âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+// ----------------------------------------
 
 function handleFile(file) {
   if (!file) return;
-  showLoading('Parsing routeâ¦');
+  showLoading('Parsing route...');
   const reader = new FileReader();
   reader.onload = e => {
     try {
@@ -700,7 +700,7 @@ function handleFile(file) {
       loadRoute(coords, name);
     } catch(err) {
       hideLoading();
-      showToast('â  ' + err.message);
+      showToast('&#9888; ' + err.message);
     }
   };
   reader.readAsText(file);
@@ -722,16 +722,16 @@ function loadRoute(rawCoords, name) {
   mkPreviewMap(pts);
 }
 
-// âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+// ----------------------------------------
 // GPS WATCH
-// âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+// ----------------------------------------
 
 let watchId = null;
 
 function startGPS() {
   if (!navigator.geolocation) { showToast('Geolocation not supported on this browser.'); return; }
   g('gpsDot').className = 'gps-dot';
-  g('gpsLabel').textContent = 'acquiringâ¦';
+  g('gpsLabel').textContent = 'acquiring...';
   watchId = navigator.geolocation.watchPosition(onPos, onPosErr, {
     enableHighAccuracy: true, timeout: 12000, maximumAge: 1500
   });
@@ -741,9 +741,9 @@ function stopGPS() {
   if (watchId != null) { navigator.geolocation.clearWatch(watchId); watchId = null; }
 }
 
-// âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+// ----------------------------------------
 // NAVIGATION LIFECYCLE
-// âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+// ----------------------------------------
 
 function startNav() {
   S.active = true; S.segIdx = 0;
@@ -758,7 +758,7 @@ function startNav() {
     ? `First, ${first.type.toLowerCase()} in ${fmtDist(first.distFromStart)}.`
     : 'Continue straight to your destination.'));
 
-  setTop('normal', first?.icon ?? 'â',
+  setTop('normal', first?.icon ?? '&uarr;',
     first?.type ?? 'Continue straight',
     first ? fmtDist(first.distFromStart) : fmtDist(S.totalDist));
 }
@@ -770,9 +770,9 @@ function stopNav() {
   showScreen('previewScreen');
 }
 
-// âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+// ----------------------------------------
 // EVENTS
-// âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+// ----------------------------------------
 
 // File browse
 g('browseBtn').addEventListener('click', () => g('fileInput').click());
